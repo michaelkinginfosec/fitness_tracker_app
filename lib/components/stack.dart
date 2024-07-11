@@ -35,36 +35,28 @@ class StackedContainers extends StatelessWidget {
             decoration: BoxDecoration(
               color: Colors.blue,
               borderRadius: BorderRadius.circular(20),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.5),
-                  spreadRadius: 2,
-                  blurRadius: 5,
-                  offset: Offset(0, 3),
-                ),
-              ],
             ),
           ),
         ),
-        Positioned(
-          top: 30,
-          child: Container(
-            width: 200,
-            height: 200,
-            decoration: BoxDecoration(
-              color: Colors.yellow,
-              borderRadius: BorderRadius.circular(20),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.5),
-                  spreadRadius: 2,
-                  blurRadius: 5,
-                  offset: Offset(0, 3),
-                ),
-              ],
-            ),
-          ),
-        ),
+        // Positioned(
+        //   top: 30,
+        //   child: Container(
+        //     width: 200,
+        //     height: 200,
+        //     decoration: BoxDecoration(
+        //       color: Colors.yellow,
+        //       borderRadius: BorderRadius.circular(20),
+        //       boxShadow: [
+        //         BoxShadow(
+        //           color: Colors.black.withOpacity(0.5),
+        //           spreadRadius: 2,
+        //           blurRadius: 5,
+        //           offset: Offset(0, 3),
+        //         ),
+        //       ],
+        //     ),
+        //   ),
+        // ),
       ],
     );
   }
