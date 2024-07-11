@@ -22,64 +22,85 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         profileButon: () {},
         calenderIcon: () {},
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 30,
+      body: Column(
+        children: [
+          Container(
+            height: MediaQuery.of(context).size.height * 0.3,
+            width: double.infinity,
+            color: Colors.grey.shade100,
+            child: const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Text(
+                    'Fitnes \nTracking Device',
+                    style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      CategoryContainer(
+                        text: "Connection",
+                      ),
+                      CategoryContainer(
+                        text: "Statistic",
+                      ),
+                      CategoryContainer(
+                        text: "Shop",
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                ],
+              ),
             ),
-            const Text(
-              'Fitnes \nTracking Device',
-              style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+          ),
+          Expanded(
+            flex: 1,
+            child: Container(
+              width: double.infinity,
+              color: Colors.black,
+              child: Column(
+                children: [
+                  Stack(
+                    children: [
+                      Positioned(
+                        top: 10,
+                        child: Container(
+                          height: 200,
+                          width: 200,
+                          decoration: BoxDecoration(
+                            color: Colors.red,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        top: 20,
+                        child: Container(
+                          height: 200,
+                          width: 200,
+                          decoration: BoxDecoration(
+                            color: Colors.green,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ],
+              ),
             ),
-            const SizedBox(
-              height: 20,
-            ),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                CategoryContainer(
-                  text: "Connection",
-                ),
-                CategoryContainer(
-                  text: "Statistic",
-                ),
-                CategoryContainer(
-                  text: "Shop",
-                ),
-              ],
-            ),
-            // Stack(
-            //   children: [
-            //     Positioned(
-            //       top: 20,
-            //       left: 30,
-            //       child: Container(
-            //         height: 50,
-            //         width: double.infinity,
-            //         color: Colors.blue,
-            //       ),
-            //     ),
-            //     // Positioned(
-            //     //   child: Container(
-            //     //     height: 50,
-            //     //     width: double.infinity,
-            //     //     color: Colors.red,
-            //     //   ),
-            //     // ),
-            //     // Positioned(
-            //     //   left: -20,
-            //     //   child: Container(
-            //     //     height: 50,
-            //     //     width: double.infinity,
-            //     //     color: Colors.green,
-            //     //   ),
-            //     // ),
-            //   ],
-            // )
-          ],
-        ),
+          )
+        ],
       ),
     );
   }
