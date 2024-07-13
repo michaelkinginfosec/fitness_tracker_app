@@ -1,6 +1,5 @@
 import 'package:fitness_tracker_app/components/categories_container.dart';
 import 'package:fitness_tracker_app/components/custom_app_bar.dart';
-import 'package:fitness_tracker_app/components/stack.dart';
 
 import 'package:flutter/material.dart';
 
@@ -65,14 +64,38 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             ),
           ),
           Expanded(
-            flex: 1,
             child: Container(
               width: double.infinity,
               color: Colors.black,
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  //
-                  const StackedContainers()
+                  Container(
+                    child: Row(
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Colors.grey.shade100,
+                            shape: BoxShape.circle,
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: Icon(Icons.add),
+                          ),
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Colors.grey.shade100,
+                            shape: BoxShape.circle,
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: Icon(Icons.add),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
                 ],
               ),
             ),
