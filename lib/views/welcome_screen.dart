@@ -1,7 +1,13 @@
 import 'package:fitness_tracker_app/components/categories_container.dart';
 import 'package:fitness_tracker_app/components/custom_app_bar.dart';
+import 'package:fitness_tracker_app/components/custom_swipeable_button.dart';
+
+import 'package:fitness_tracker_app/components/stack.dart';
+import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:swipeable_button_view/swipeable_button_view.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
@@ -63,6 +69,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               ),
             ),
           ),
+          StackedContainers(),
           Expanded(
             child: Container(
               width: double.infinity,
@@ -70,32 +77,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
+                  Expanded(
                     child: Row(
                       children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Colors.grey.shade100,
-                            shape: BoxShape.circle,
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(20.0),
-                            child: Icon(Icons.add),
-                          ),
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Colors.grey.shade100,
-                            shape: BoxShape.circle,
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(20.0),
-                            child: Icon(Icons.add),
-                          ),
-                        ),
+                        SwipeWidget(onSwipeComplete: () {}),
                       ],
                     ),
-                  )
+                  ),
                 ],
               ),
             ),

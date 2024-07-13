@@ -1,91 +1,114 @@
-// // ignore_for_file: public_member_api_docs, sort_constructors_first
-// import 'package:flutter/material.dart';
-// import 'package:swipeable_button_view/swipeable_button_view.dart';
-
-// class SwipeButton extends StatelessWidget {
-//   final VoidCallback onFinish;
-//   final VoidCallback onWaitingProcess;
-//   final Color activeColor;
-//   final Widget buttonLeftWidget;
-//   final Widget buttonRightwidget;
-//   final String buttonText;
-//   final bool isFinished;
-//   final TextStyle buttonTextStyle;
-
-//   const SwipeButton({
-//     super.key,
-//     required this.onFinish,
-//     required this.onWaitingProcess,
-//     required this.activeColor,
-//     required this.buttonLeftWidget,
-//     required this.buttonRightwidget,
-//     required this.buttonText,
-//     required this.isFinished,
-//     required this.buttonTextStyle,
-//   });
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Row(
-//       children: [
-//         SwipeableButtonView(
-//           onFinish: onFinish,
-//           onWaitingProcess: onWaitingProcess,
-//           activeColor: activeColor,
-//           buttonWidget: buttonLeftWidget,
-//           buttonText: buttonText,
-//           isFinished: isFinished,
-//           buttontextstyle: buttonTextStyle,
-//         ),
-//         buttonRightwidget,
-//       ],
-//     );
-//   }
-// }
-
 import 'package:flutter/material.dart';
-import 'package:swipeable_button_view/swipeable_button_view.dart';
 
-class CustomSwipeableButton extends StatelessWidget {
-  final Widget buttonRightWidget;
-  final VoidCallback onFinish;
-  final VoidCallback onWaitingProcess;
-  final Color activeColor;
-  final Widget buttonLeftWidget;
-  final String buttonText;
-  final bool isFinished;
-  final TextStyle buttonTextStyle;
+class SwipeWidget extends StatefulWidget {
+  final VoidCallback onSwipeComplete;
 
-  const CustomSwipeableButton({
-    Key? key,
-    required this.buttonRightWidget,
-    required this.onFinish,
-    required this.onWaitingProcess,
-    required this.activeColor,
-    required this.buttonLeftWidget,
-    required this.buttonText,
-    required this.isFinished,
-    required this.buttonTextStyle,
-  }) : super(key: key);
+  const SwipeWidget({required this.onSwipeComplete});
+
+  @override
+  _SwipeWidgetState createState() => _SwipeWidgetState();
+}
+
+class _SwipeWidgetState extends State<SwipeWidget> {
+  double _dragPosition = 0.0;
+  bool _isComplete = false;
+
+  void _onPanUpdate(DragUpdateDetails details) {
+    setState(() {
+      _dragPosition += details.delta.dx;
+      if (_dragPosition < 0) _dragPosition = 0;
+      if (_dragPosition > 240)
+        _dragPosition = 240; // Adjust swipe width accordingly
+    });
+  }
+
+  void _onPanEnd(DragEndDetails details) {
+    if (_dragPosition > 200) {
+      // Adjust threshold to trigger action
+      setState(() {
+        _isComplete = true;
+        _dragPosition = 240;
+        widget.onSwipeComplete();
+      });
+    } else {
+      setState(() {
+        _dragPosition = 0;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        buttonLeftWidget,
-        Expanded(
-          child: SwipeableButtonView(
-            onFinish: onFinish,
-            onWaitingProcess: onWaitingProcess,
-            activeColor: activeColor,
-            buttonWidget: Container(),
-            buttonText: buttonText,
-            isFinished: isFinished,
-            buttontextstyle: buttonTextStyle,
+    return Padding(
+      padding: const EdgeInsets.only(left: 50),
+      child: Stack(
+        children: [
+          Container(
+            width: 300,
+            height: 60,
+            decoration: BoxDecoration(
+              color: const Color.fromARGB(255, 42, 40, 40),
+              borderRadius: BorderRadius.circular(30),
+            ),
+            child: const Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Swipe to Action ",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Icon(
+                    Icons.arrow_forward_ios,
+                    size: 10,
+                  ),
+                  Icon(
+                    Icons.arrow_forward_ios,
+                    size: 10,
+                  )
+                ],
+              ),
+            ),
           ),
-        ),
-        buttonRightWidget,
-      ],
+          Positioned(
+            left: _dragPosition,
+            child: GestureDetector(
+              onPanUpdate: _onPanUpdate,
+              onPanEnd: _onPanEnd,
+              child: Container(
+                width: 60,
+                height: 60,
+                decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 91, 112, 118),
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                child: const Icon(
+                  Icons.add,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            right: 0,
+            child: Container(
+              width: 60,
+              height: 60,
+              decoration: BoxDecoration(
+                color: Colors.green,
+                borderRadius: BorderRadius.circular(30),
+              ),
+              child: const Icon(
+                Icons.check,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
